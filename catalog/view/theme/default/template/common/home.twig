@@ -1,0 +1,160 @@
+{# {{ header }}
+<div id="common-home" class="container">
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}{{ content_bottom }}</div>
+    {{ column_right }}</div>
+</div>
+{{ footer }} #}
+
+{{ header }}
+<div style='text-align:center; padding: 4rem 1rem'>
+    <h1>This suppose to be your home page</h1>
+    <h4>you could put this code in any page however</h4>
+    <div>
+      <span>Subscribe to notification</span>
+      <input id="push_switcher" type="checkbox" data-toggle="toggle" data-on="ON" data-off="OFF" data-onstyle="success" data-offstyle="danger" data-size="small">
+    </div>
+    
+    <div style='padding:1rem 0'>
+      <button class='btn btn-primary btn-lg' id='push_customer'>Send customer push</button><br/>
+    </div>
+    <div style='padding:1rem 0'>
+      <button class='btn btn-danger btn-lg' id='push_admin'>Send admin push</button><br/>
+      First go to admin panel to subscribe
+    </div>
+    <div style='padding:1rem 0;display: inline-block;'>
+      <button class='btn btn-success btn-lg' id='pwa_app'>Install App</button>
+    </div>
+<div>
+{# Modal #}
+<div class="modal fade" tabindex="-1" role="dialog" id="push-result-modal">
+  <div class="modal-dialog modal-md modal-content">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="modal-body push-content-modal p-20">
+    </div>
+  </div>
+</div>
+
+<script type='application/javascript' src='catalog/view/javascript/bs-toggle/bs-toggle.js'></script>
+<link rel="stylesheet" href="catalog/view/javascript/bs-toggle/bs-toggle.css">
+{# Push Code #}
+<script>
+$(document).ready(function(){
+	//Push Switcher
+	//$("#push_switcher").bootstrapToggle();
+	$("#push_switcher").change(function (e) {
+		const status = $(this).prop("checked");
+		//Listen to btn to sub on unsub
+		if (status && !isSubscribed) {
+		push_subscribe();
+		}
+		if (!status && isSubscribed) {
+		push_unsubscribe();
+		}
+	});
+  //Initial check sub status
+	runPushCheck()
+})
+</script>
+
+{# PWA Download code #}
+<script>
+let deferredPrompt;
+const appBtn = document.querySelector("#pwa_app");
+window.addEventListener("load", () => {
+  if (navigator.standalone) {
+    console.log("Installed (iOS)");
+  } else if (matchMedia("(display-mode: standalone)").matches) {
+    console.log("Installed");
+  } else {
+    //Using browser: show button and listen download click
+    appBtn.style.display = "block";
+    SuggestAppInstall();
+  }
+});
+function SuggestAppInstall() {
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+
+    appBtn.addEventListener("click", (e) => {
+      deferredPrompt.prompt();
+      // Wait for user response
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === "accepted") {
+          //console.log("User Accepted");
+        } else {
+          //console.log("User dismissed");
+        }
+      });
+    });
+  });
+}
+window.addEventListener("appinstalled", (e) => {
+  //Option: send to statistics?
+});
+</script>
+
+{# Get rid of this code below - just for test btns #}
+<script>
+$(document).ready(function(){
+	//Push Switcher
+	//$("#push_switcher").bootstrapToggle();
+	$("#push_customer").click(function(){
+    const btn = $(this)
+    $.ajax({
+        url:
+          "index.php?route=api/webpush/testcustomer",
+        type: "POST",
+        cache: false,
+        data: '',
+        dataType: "json",
+        beforeSend: function () {
+          btn.button('loading')
+        },
+        complete: function () {
+          btn.button('reset')
+        },
+        success: function (json) {
+          console.log('DONE')
+        },
+        error: function (err) {
+          console.log(err);
+        },
+      });
+  })
+
+  $("#push_admin").click(function(){
+    const btn = $(this)
+    $.ajax({
+        url:
+          "index.php?route=api/webpush/testadmin",
+        type: "POST",
+        cache: false,
+        data: '',
+        dataType: "json",
+        beforeSend: function () {
+          btn.button('loading')
+        },
+        complete: function () {
+          btn.button('reset')
+        },
+        success: function (json) {
+          console.log('DONE')
+        },
+        error: function (err) {
+          console.log(err);
+        },
+      });
+  })
+})
+</script>
