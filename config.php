@@ -6,10 +6,10 @@ define('HTTP_SERVER', 'https://ocwebpush.lan/');
 define('HTTPS_SERVER', 'https://ocwebpush.lan/');
 
 // DIR
-define('DIR_APPLICATION', '/usr/local/ampps/www/opencart-webpush/catalog/');
-define('DIR_SYSTEM', '/usr/local/ampps/www/opencart-webpush/system/');
-define('DIR_IMAGE', '/usr/local/ampps/www/opencart-webpush/image/');
-define('DIR_STORAGE', '/usr/local/ampps/www/opencart-webpush/storage/');
+define('DIR_APPLICATION', '/usr/local/ampps/www/opencart-webpush-pwa/catalog/');
+define('DIR_SYSTEM', '/usr/local/ampps/www/opencart-webpush-pwa/system/');
+define('DIR_IMAGE', '/usr/local/ampps/www/opencart-webpush-pwa/image/');
+define('DIR_STORAGE', '/usr/local/ampps/www/opencart-webpush-pwa/storage/');
 define('DIR_LANGUAGE', DIR_APPLICATION . 'language/');
 define('DIR_TEMPLATE', DIR_APPLICATION . 'view/theme/');
 define('DIR_CONFIG', DIR_SYSTEM . 'config/');
