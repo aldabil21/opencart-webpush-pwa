@@ -1,3 +1,35 @@
+<h1 align="center">⚠️⚠️⚠️⚠️  NOTICE   ⚠️⚠️⚠️⚠️</h1>
+<p align="center"> 👇🏾👇🏾 This has been bundled up using the recommended OpenCart Event System. And moved into here 👇🏾👇🏾 </p>
+<p align="center"> https://github.com/aldabil21/opencart-easywebpush </p>
+<div align="center">
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+</div>
+
+
 # Webpush notifications / PWA in OpenCart 3.0.3.2
 
 Base structure to add webpush, serviceworker, PWA to an OpenCart website, used in Opencart 3.0.3.2
